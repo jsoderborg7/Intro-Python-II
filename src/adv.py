@@ -53,7 +53,59 @@ def AdventureGame():
     print({player.current_room.descripton})
 
 # * Waits for user input and decides what to do.
-    
+    while True:
+        userInput = input(
+            "Enter command n,s,e,w to move, q to quit")
+
+        if userInput == ('n' or 's' or 'e' or 'w'):
+            print("you have entered {userInput!r}")
+        elif userInput == ('q'):
+            print("Thanks for playing!")
+            break
+        else:
+            print("Please enter valid command")
+
+        if userInput == 'n':
+            print("Heading North!")
+            if player.current_room.n_to == None:
+                print("Oops, no room here! Please enter another command")
+            else:
+                player.current_room = player.current_room.n_to
+                print("You have entered {player.current_room}")
+                print({player.current_room.description})
+
+        if userInput == 's':
+            print("Heading South!")
+            if player.current_room.s_to == None:
+                print("Oops, no room here! Please enter another command")
+            else:
+                player.current_room = player.current_room.s_to
+                print("You have entered {player.current_room}")
+                print({player.current_room.description})
+
+        if userInput == 'e':
+            print("Heading East!")
+            if player.current_room.e_to == None:
+                print("Oops, no room here! Please enter another command")
+            else:
+                player.current_room = player.current_room.e_to
+                print("You have entered {player.current_room}")
+                print({player.current_room.description})
+
+        if userInput == 'w':
+            print("Heading West!")
+            if player.current_room.w_to == None:
+                print("Oops, no room here! Please enter another command")
+            else:
+                player.current_room = player.current_room.w_to
+                print("You have entered {player.current_room}")
+                print({player.current_room.description})
+
+if __name__ == '__main__':
+    AdventureGame()
+
+
+
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
 # Print an error message if the movement isn't allowed.
