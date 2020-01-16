@@ -1,6 +1,5 @@
 from room import Room
 from player import Player
-import textwrap
 
 # Declare all the rooms
 
@@ -47,10 +46,10 @@ player = Player("Hermione", room['outside'])
 #
 # * Prints the current room name
 def AdventureGame():
-    print({player.current_room})
+    print(f'{player.current_room}')
 
 # * Prints the current description (the textwrap module might be useful here).
-    print({player.current_room.descripton})
+    print(f"{player.current_room.description}")
 
 # * Waits for user input and decides what to do.
     while True:
@@ -58,7 +57,7 @@ def AdventureGame():
             "Enter command n,s,e,w to move, q to quit")
 
         if userInput == ('n' or 's' or 'e' or 'w'):
-            print("you have entered {userInput!r}")
+            print(f"You have entered {userInput!r}")
         elif userInput == ('q'):
             print("Thanks for playing!")
             break
@@ -71,8 +70,8 @@ def AdventureGame():
                 print("Oops, no room here! Please enter another command")
             else:
                 player.current_room = player.current_room.n_to
-                print("You have entered {player.current_room}")
-                print({player.current_room.description})
+                print(f"You have entered {player.current_room}")
+                print(f"{player.current_room.description}")
 
         if userInput == 's':
             print("Heading South!")
@@ -80,8 +79,8 @@ def AdventureGame():
                 print("Oops, no room here! Please enter another command")
             else:
                 player.current_room = player.current_room.s_to
-                print("You have entered {player.current_room}")
-                print({player.current_room.description})
+                print(f"You have entered {player.current_room}")
+                print(f"{player.current_room.description}")
 
         if userInput == 'e':
             print("Heading East!")
@@ -89,8 +88,8 @@ def AdventureGame():
                 print("Oops, no room here! Please enter another command")
             else:
                 player.current_room = player.current_room.e_to
-                print("You have entered {player.current_room}")
-                print({player.current_room.description})
+                print(f"You have entered {player.current_room}")
+                print(f"{player.current_room.description}")
 
         if userInput == 'w':
             print("Heading West!")
@@ -98,8 +97,8 @@ def AdventureGame():
                 print("Oops, no room here! Please enter another command")
             else:
                 player.current_room = player.current_room.w_to
-                print("You have entered {player.current_room}")
-                print({player.current_room.description})
+                print(f"You have entered {player.current_room}")
+                print(f"{player.current_room.ndescription}")
 
 if __name__ == '__main__':
     AdventureGame()
