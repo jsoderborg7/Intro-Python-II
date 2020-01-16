@@ -46,7 +46,7 @@ player = Player("Hermione", room['outside'])
 #
 # * Prints the current room name
 def AdventureGame():
-    print(f'{player.current_room}')
+    print(f'\n{player.current_room}')
 
 # * Prints the current description (the textwrap module might be useful here).
     print(f"{player.current_room.description}")
@@ -54,7 +54,7 @@ def AdventureGame():
 # * Waits for user input and decides what to do.
     while True:
         userInput = input(
-            "Enter command n,s,e,w to move, q to quit")
+            "\nEnter command n,s,e,w to move, q to quit\n")
 
         if userInput == ('n' or 's' or 'e' or 'w'):
             print(f"You have entered {userInput!r}")
@@ -98,7 +98,7 @@ def AdventureGame():
             else:
                 player.current_room = player.current_room.w_to
                 print(f"You have entered {player.current_room}")
-                print(f"{player.current_room.ndescription}")
+                print(f"{player.current_room.description}")
 
 if __name__ == '__main__':
     AdventureGame()
