@@ -53,24 +53,32 @@ while True:
         print(f"You found a {item}")
 
     # Commands
-    cmd = input("\nPlease choose 'n,s,w,e' to move, 'pickup' to take item, 'drop' to drop item, or 'q' to quit\n")
+    cmd = input("\nPlease choose 'n,s,w,e' to move, 'get' to take item, 'drop' to drop item, or 'q' to quit\n")
 
     # Action commands
 
     if len(cmd) > 1:
         action = cmd.split(' ')
-        if action[0] == 'pickup':
+        if action[0] == 'get':
             if action[1] in itemsInRoom:
-                player.current_room.removeItems(action[1])
+                player.current_room.removeItem(action[1])
                 player.pickupItem(action[1])
             else:
                 print("Sorry, that item doesn't exist here!")
         elif action[0] == 'drop':
             if action[1] in player.items:
-                player.current_room.addItems(action[1])
+                player.current_room.addItem(action[1])
                 player.dropItem(action[1])
 
     # Inventory commands
+
+    if cmd == 'i':
+        if len(player.items) > 0:
+            print('Your Inventory: ')
+            for item in player.items:
+                print(f"{item}")
+
+    # Direction commands
 
     if cmd == 'n':
         if player.current_room.n_to is None:

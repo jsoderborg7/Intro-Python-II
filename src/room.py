@@ -11,10 +11,10 @@ class Room:
     self.w_to = None
     self.items = items
 
-  def removeItems(self, item):
+  def removeItem(self, item):
     self.items.remove(item)
 
-  def addItems(self, item):
+  def addItem(self, item):
     self.items.append(item)
 
 
