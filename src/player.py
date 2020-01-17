@@ -5,17 +5,19 @@ class Player:
   def __init__(self, name, current_room):
     self.name = name
     self.current_room = current_room
-    self.inventory = []
+    self.items = []
 
   def __str__(self):
-    return f"{self.name}"
+    return f"{self.name} is in {self.current_room}"
 
 # add and remove items from player inventory
 
-  def add_player_item(self, item):
-    self.inventory.append(item)
-    item.on_pickup()
+  def pickupItem(self, item):
+    self.items.append(item)
+    print(f"You picked up {item}")
+ 
 
-  def remove_player_item(self, item):
-    self.inventory.remove(item)
-    item.on_drop()
+  def dropItem(self, item):
+    self.items.remove(item)
+    print(f"You dropped {item}")
+
