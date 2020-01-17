@@ -12,10 +12,10 @@ class Player:
 
 # add and remove items from player inventory
 
-  def addItem(self, item):
+  def add_player_item(self, item):
     self.inventory.append(item)
-    item.pickup()
+    item.on_pickup()
 
-  def removeItem(self, item):
+  def remove_player_item(self, item):
     self.inventory.remove(item)
-    item.drop()
+    item.on_drop()

@@ -14,5 +14,14 @@ class Room:
   def __str__(self):
     return f"{self.name}"
 
+  def get_room_items(self):
+    return self.items
+
+  def add_room_item(self, item):
+    self.items.append(item)
+
+  def remove_room_item(self, item):
+    self.items.remove(item)
+
 
 

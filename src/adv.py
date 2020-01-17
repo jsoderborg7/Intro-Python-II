@@ -38,9 +38,9 @@ room['treasure'].s_to = room['narrow']
 # Add items to rooms
 
 room['outside'].items.append(
-    [Item("Flashlight", "Super bright")])
+    [Item("Lamp", "Small oil lamp")])
 room['overlook'].items.append(
-    [Item("Binoculars", "See items 90 yards away")])
+    [Item("Telescope", "Small brass telescope")])
 room['narrow'].items.append(
     [Item("Coins", "Several gold coins in odd sizes")])
 room['treasure'].items.append(
@@ -56,30 +56,51 @@ player = Player("Hermione", room['outside'])
 
 # Inventory/item loops
 
-def room_items():
+def roomItems():
     if len(player.current_room.items) > 0:
       print('An item is hidden in this room:')
       for item in player.current_room.items:
-        print(f"{item.name}")
+        print(f"{item.get_item_name()}")
 
-def player_inventory():
+def playerInventory():
     if len(player.inventory) > 0:
         print(f"Here is your inventory: ")
         for item in player.inventory:
-            print(f"{item.name}")
+            print(f"{item.get_item_name()}")
 
 def inventory():
     while True:
-        player_inventory()
+        playerInventory()
         interact = input("Choose from the following options: \n 'pickup' to add item to inventory \n 'drop' to remove item from inventory \n 'i' to check inventory \n 'move' to move on")
         if interact == 'move':
             break
         elif interact == 'i':
-            print(player_inventory())
-        elif interact == 'pickup':
-            player.addItem(Item)
-        elif interact == 'drop':
-            player.removeItem(Item)
+            print(playerInventory())
+        elif len(interact.split(' ')) > 1:
+            action = interact.split(' ')[0]
+            itemName = interact.split(' ')[1]
+            roomItems = [item.get_item_name() for item in player.current_room.get_room_items()]
+            playerItems = [item.get_item_name() for item in player.inventory]
+
+            if action == "pickup":
+                if itemName in roomItems:
+                    player.add_player_item(
+                        player.current_room.get_room_items()[roomItems.index(itemName)])
+                    player.current_room.remove_room_item(player.current_room.get_room_items()[
+                                                    roomItems.index(itemName)])
+                else:
+                    print(f"Oops! {itemName} doesn't exist!")
+            elif action == "drop":
+                if itemName in playerItems:
+                    player.current_room.add_room_item(
+                        player.inventory[playerItems.index(itemName)])
+                    player.remove_player_item(
+                        player.inventory[playerItems.index(itemName)])
+                else: 
+                    print(f"Oops! {itemName} doesn't exist!")
+            else:
+                print("Please choose a valid option")
+
 
 
 # Write a loop that:
@@ -91,6 +112,8 @@ def AdventureGame():
 # * Prints the current description (the textwrap module might be useful here).
     print(f"{player.current_room.description}")
 
+    roomItems()
+
 # * Waits for user input and decides what to do.
     while True:
         userInput = input(
@@ -98,7 +121,9 @@ def AdventureGame():
 
         if userInput == ('n' or 's' or 'e' or 'w'):
             print(f"You have entered {userInput!r}")
-        elif userInput == ('q'):
+        elif userInput == 'i':
+            inventory()
+        elif userInput == 'q':
             print("Thanks for playing!")
             break
         else:
@@ -112,6 +137,7 @@ def AdventureGame():
                 player.current_room = player.current_room.n_to
                 print(f"You have entered {player.current_room}")
                 print(f"{player.current_room.description}")
+                roomItems()
 
         if userInput == 's':
             print("Heading South!")
@@ -121,6 +147,7 @@ def AdventureGame():
                 player.current_room = player.current_room.s_to
                 print(f"You have entered {player.current_room}")
                 print(f"{player.current_room.description}")
+                roomItems()
 
         if userInput == 'e':
             print("Heading East!")
@@ -130,6 +157,7 @@ def AdventureGame():
                 player.current_room = player.current_room.e_to
                 print(f"You have entered {player.current_room}")
                 print(f"{player.current_room.description}")
+                roomItems()
 
         if userInput == 'w':
             print("Heading West!")
@@ -139,6 +167,7 @@ def AdventureGame():
                 player.current_room = player.current_room.w_to
                 print(f"You have entered {player.current_room}")
                 print(f"{player.current_room.description}")
+                roomItems()
 
 if __name__ == '__main__':
     AdventureGame()
