@@ -1,5 +1,6 @@
 from room import Room
 from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -34,6 +35,17 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+# Add items to rooms
+
+room['outside'].items.append(
+    [Item("Flashlight", "Super bright")])
+room['overlook'].items.append(
+    [Item("Binoculars", "See items 90 yards away")])
+room['narrow'].items.append(
+    [Item("Coins", "Several gold coins in odd sizes")])
+room['treasure'].items.append(
+    [Item("Scrap", "Scrap of paper, maybe a piece of a map?")])
+
 #
 # Main
 #
@@ -41,6 +53,34 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 
 player = Player("Hermione", room['outside'])
+
+# Inventory/item loops
+
+def room_items():
+    if len(player.current_room.items) > 0:
+      print('An item is hidden in this room:')
+      for item in player.current_room.items:
+        print(f"{item.name}")
+
+def player_inventory():
+    if len(player.inventory) > 0:
+        print(f"Here is your inventory: ")
+        for item in player.inventory:
+            print(f"{item.name}")
+
+def inventory():
+    while True:
+        player_inventory()
+        interact = input("Choose from the following options: \n 'pickup' to add item to inventory \n 'drop' to remove item from inventory \n 'i' to check inventory \n 'move' to move on")
+        if interact == 'move':
+            break
+        elif interact == 'i':
+            print(player_inventory())
+        elif interact == 'pickup':
+            player.addItem(Item)
+        elif interact == 'drop':
+            player.removeItem(Item)
+
 
 # Write a loop that:
 #
